@@ -1,0 +1,5 @@
+# top level for anything that is not defined
+*                   @gr0
+
+# this file needs review from Dom and engineering lead
+.github/CODEOWNERS  @dom @gr0

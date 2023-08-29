@@ -1,0 +1,15 @@
+{
+  "LABEL": {
+    "name": "Invalid PR title",
+    "color": "EEEEEE"
+  },
+  "CHECKS": {
+    "regexp": "^(build|ci|docs|feat|fix|perf|refactor|revert|style|test)\\(?(website|[a-z-]*)\\)?\\!?\\:\\s{1}[a-z]+[\\w\\s\\,\\/\\.\\#\\(\\)\\-\\:\\']+[^.\\s]$"
+  },
+  "MESSAGES": {
+    "success": "PR title is OK",
+    "failure": "The PR title does not comply with commit message format: https://github.com/Archipelo/top/blob/main/handbook/docs/engineering/CONTRIBUTING.md#conventional-commits-specification",
+    "notice": "Checking PR title compliance with commit message format..."
+  }
+}
+

@@ -1,0 +1,62 @@
+repos:
+  # Basic hooks:
+  #  - check-yaml
+  #  - end-of-file-fixer
+  #  - trailing-whitespace
+  #  - check-merge-conflict
+  #  - detect-private-key
+  #  - forbid-tabs
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: end-of-file-fixer
+        name: Ensure 1 blank line at the end of the files
+        exclude: '.*[\.drawio|\.xml|\.sql|\.txt|\.svg|\.nvmrc]$'
+      - id: trailing-whitespace
+        name: Remove trailing whitespaces
+        exclude: |
+          (?x)^(
+              .*[\.sql|\.http|\.go]$|
+              .*/_fixtures/.*|
+              .*mocks.*|
+              .*/tests/fixtures/.*|
+          )$
+      - id: check-merge-conflict
+        name: Check that merge conflicts are not being committed
+      - id: detect-private-key
+        name: Check for the existence of private keys
+      - id: check-yaml
+        name: Check Yaml files
+      - id: check-json
+        name: Validate JSON files
+      - id: check-toml
+        name: Check TOML files
+
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.4.2
+    hooks:
+      - id: remove-tabs
+        name: Change tabs to spaces
+        args: [--whitespaces-count, '2']
+        exclude: |
+          (?x)^(
+              .*[\.go|\.svg]$|
+              .*/go.mod|
+              go.work|
+              .*/_fixtures/.*|
+              .*/tests/fixtures/.*|
+          )$
+
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.16
+    hooks:
+      - id: mdformat
+        name: Reformat Markdown files
+        additional_dependencies:
+          - mdformat-gfm # GitHub Flavored Markdown plugin
+          - mdformat-web # JavaScript, CSS, HTML, XML plugin
+          - mdformat-black # Python plugin
+          - mdformat-gofmt # Go plugin
+          - mdformat-beautysh # Bash plugin
+          - mdformat-frontmatter # Front Matter plugin (for Docusaurus)
+

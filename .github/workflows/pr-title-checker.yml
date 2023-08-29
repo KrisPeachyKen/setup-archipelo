@@ -1,0 +1,25 @@
+name: PR Title Checker
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+      - labeled
+      - unlabeled
+      - auto_merge_enabled
+    branches:
+      - main
+
+jobs:
+  check:
+    name: 'PR: Title Check'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: thehanimo/pr-title-checker@v1.4.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          configuration_path: '.github/pr-title-checker-config.json'
+
