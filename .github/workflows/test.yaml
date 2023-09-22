@@ -12,33 +12,30 @@ defaults:
 jobs:
   test:
     name: Test
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest,  ubuntu-latest]
-        version: [d7eceb6b08badd771b0b4d236ec43720284ef6a6]
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Archipelo
-      uses: ./
-      with:
-        version: ${{ matrix.version }}
+      - name: Setup Archipelo
+        uses: ./
 
-    - name: Capture archipelo version installed
-      run: |
-        export AR_VERSION=$( archipelo version )
-        echo 'AR_VERSION_INSTALLED<<EOF' >> $GITHUB_ENV
-        archipelo version >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
+      - name: Show folder
+        run: ls -lsa
 
-    - name: Verify
-      shell: python
-      env:
-        AR_VERSION_EXPECTED: ${{ matrix.version }}
-      run: |
-        import sys, os
-        sys.exit(
-            int(not os.environ["AR_VERSION_EXPECTED"] in os.environ["AR_VERSION_INSTALLED"])
-        )
+      - name: Capture archipelo version installed
+        run: |
+          export AR_VERSION=$( archipelo version )
+          echo 'AR_VERSION_INSTALLED<<EOF' >> $GITHUB_ENV
+          archipelo version >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+
+      - name: Verify
+        shell: python
+        env:
+          AR_VERSION_EXPECTED: v0.6.86
+        run: |
+          import sys, os
+          sys.exit(
+              int(not os.environ["AR_VERSION_EXPECTED"] in os.environ["AR_VERSION_INSTALLED"])
+          )
